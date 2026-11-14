@@ -1,0 +1,32 @@
+.venv/
+.venv-*/
+__pycache__/
+.pytest_cache/
+.DS_Store
+# 秘密情報はリポジトリに入れない（クラウドの鍵・トークン・設定）
+.streamlit/secrets.toml
+secrets.toml
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.pickle
+service_account*.json
+service-account*.json
+credentials*.json
+client_secret*.json
+token*.json
+# 実測データ（人や家が写った写真・個人の記録）はリポジトリに入れない。授業では手元でアップロードして使う
+data/
+*.jpg
+*.JPG
+*.jpeg
+*.JPEG
+*.heic
+*.HEIC
+IMG_*
+*.zip
+*.pdf
+__MACOSX/
