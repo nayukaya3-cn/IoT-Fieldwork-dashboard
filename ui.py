@@ -46,7 +46,7 @@ def hero(eyebrow: str, title: str, lead: str, stage: str | None = None) -> None:
     st.markdown(
         f"<div class='hero'><p class='eyebrow'>{html.escape(eyebrow)}</p>"
         f"<h1>{html.escape(title)}</h1><p class='lead'>{html.escape(lead)}</p>"
-        f"<div style='margin-top:.7rem'>{stage_bar(stage)}</div></div>",
+        + (f"<div style='margin-top:.7rem'>{stage_bar(stage)}</div>" if stage else "") + "</div>",
         unsafe_allow_html=True,
     )
 

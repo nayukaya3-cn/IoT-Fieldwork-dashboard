@@ -54,7 +54,7 @@ def test_no_names_of_courses_or_people():
     """講座名・講師名・事業所名・講座のURLを持ちこんでいない"""
     from pathlib import Path
     root = Path(__file__).resolve().parents[1]
-    for p in [*root.glob("*.py"), *(root / "pages").glob("*.py")]:
+    for p in [*root.glob("*.py"), *(root / "views").glob("*.py")]:
         text = p.read_text(encoding="utf-8")
         for word in ("udemy", "Udemy", "大手町", "株式会社"):
             assert word not in text, (p.name, word)

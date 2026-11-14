@@ -5,7 +5,8 @@
   🧬 科学と人間生活 × 情報Ⅰ         … 教室：教科書の単元を Python で動かす（事前学習）
   🌾 スマートパン屋農家              … 現場：畑・パン工房で確かめる
 
-ページのURLは「pages/ のファイル名から番号を除いた部分」（Streamlit の既定の url_path）。
+ページのURLは「views/ のファイル名から番号を除いた部分」（st.Page の既定の url_path）。
+※ フォルダ名を pages/ にしないこと：Streamlit が自動で読みこみ、URLを直接開いたときに左メニューが崩れる。
 Streamlit に依存しない（render() の中だけで import する）。
 """
 from __future__ import annotations
@@ -32,6 +33,9 @@ LINKS: list[tuple[str, str, str, str]] = [
     ("hakaru", "tanpaku", "iot", "同じCO2の模型を、教室の授業1ページにまとめた版"),
     ("todokeru", "bakery", "", "育てた麦・焼いたパンを届ける現場"),
     ("unyo", "tanpaku", "panic", "止まっても困らない備え（パニックプルーフ）と、止まらない運用は同じ考え方"),
+    ("mega_rensa", "tanpaku", "panic", "井戸・ハウスの備え（パニックプルーフ）を、依存の連鎖で見直す"),
+    ("mega_jikyu", "bakery", "", "播いた麦でパンを焼く現場"),
+    ("mega_jikyu", "tanpaku", "biseibutsu", "サワー種（自家製の酵母）と発酵の温度"),
 ]
 
 

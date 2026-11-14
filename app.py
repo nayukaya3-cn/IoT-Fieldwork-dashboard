@@ -2,8 +2,9 @@
 IoTアプリ構築・運用支援 ＝ フィールドワーク実践 ─ 入口（左メニューの組み立て）
 
 起動: streamlit run app.py
-  ホームは home.py、各ページは pages/、計算部品は iot_core.py（測る〜つくる）と ops_core.py（運用・届ける）。
-左メニューは8つの段の順。ページを足すときは NAV に1行足すだけ（ファイルが無い行は自動で飛ばす）。
+  ホームは home.py、各ページは views/（pages/ という名前にしない：Streamlit が自動で読みこみ、
+  URLを直接開いたときに左メニューがファイル名の一覧に置きかわるため）、計算部品は iot_core.py（測る〜つくる）と ops_core.py（運用・届ける）。
+左メニューは8つの段の順、そのあとにメガリスク（南海トラフ地震＋富士山噴火）への備え。ページを足すときは NAV に1行足すだけ（ファイルが無い行は自動で飛ばす）。
 """
 import importlib
 from pathlib import Path
@@ -13,13 +14,14 @@ import streamlit as st
 import backbone
 import guard
 import iot_core
+import mega_core
 import ops_core
 import sister_sites as ss
 import ui
 
 # Streamlit Cloud が古いモジュールを読みこんだまま app.py だけ新しくなったときの対策
 if getattr(ui, "API_VERSION", 0) < 1:
-    for _m in (iot_core, ops_core, backbone, guard, ss, ui):
+    for _m in (iot_core, mega_core, ops_core, backbone, guard, ss, ui):
         importlib.reload(_m)
 
 ROOT = Path(__file__).parent
@@ -28,22 +30,29 @@ st.set_page_config(page_title="IoTアプリ構築・運用支援 ＝ フィー�
 NAV = {
     "📡 はじめに": [
         ("home.py", "ホーム（問いと歩き方）", "🏠"),
-        ("pages/1_chizu.py", "地図と学習計画", "🗺️"),
+        ("views/1_chizu.py", "地図と学習計画", "🗺️"),
     ],
     "🔧 しくみを作る（5つの段）": [
-        ("pages/2_hakaru.py", "測る：CO2と換気", "📏"),
-        ("pages/3_tameru.py", "貯める：番地と表", "🗄️"),
-        ("pages/4_miru.py", "見る：代表値・CSV読みこみ", "📈"),
-        ("pages/5_shiraseru.py", "知らせる：誤報とまとめ", "🔔"),
-        ("pages/6_ugokasu.py", "動かす：自動水やり", "💧"),
+        ("views/2_hakaru.py", "測る：CO2と換気", "📏"),
+        ("views/3_tameru.py", "貯める：番地と表", "🗄️"),
+        ("views/4_miru.py", "見る：代表値・CSV読みこみ", "📈"),
+        ("views/5_shiraseru.py", "知らせる：誤報とまとめ", "🔔"),
+        ("views/6_ugokasu.py", "動かす：自動水やり", "💧"),
     ],
     "🌾 回して・届ける（3つの段）": [
-        ("pages/7_tsukuru.py", "つくる：設計と費用", "🖨️"),
-        ("pages/8_unyo.py", "運用する：健康診断・点検", "🔁"),
-        ("pages/9_todokeru.py", "届ける：言えることで伝える", "🛒"),
+        ("views/7_tsukuru.py", "つくる：設計と費用", "🖨️"),
+        ("views/8_unyo.py", "運用する：健康診断・点検", "🔁"),
+        ("views/9_todokeru.py", "届ける：言えることで伝える", "🛒"),
+    ],
+    "🌋 メガリスクに備える（実験的プロトタイプ）": [
+        ("views/11_mega_rekishi.py", "歴史と連動：時間差", "🌊"),
+        ("views/12_mega_rensa.py", "依存の連鎖と降灰", "🔗"),
+        ("views/13_mega_bichiku.py", "備蓄と途絶：確率で備える", "📦"),
+        ("views/14_mega_iot.py", "止まらないIoT", "🔋"),
+        ("views/15_mega_jikyu.py", "自給の基盤：麦からパン", "🌾"),
     ],
     "🧑‍🏫 先生・支援者向け": [
-        ("pages/10_kyoin.py", "構成・役割・安全", "🧑‍🏫"),
+        ("views/10_kyoin.py", "構成・役割・安全", "🧑‍🏫"),
     ],
 }
 

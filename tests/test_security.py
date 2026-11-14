@@ -4,7 +4,7 @@ import tomllib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCES = [*ROOT.glob("*.py"), *(ROOT / "pages").glob("*.py")]
+SOURCES = [*ROOT.glob("*.py"), *(ROOT / "views").glob("*.py")]
 
 
 def test_no_password_inputs_or_network():
