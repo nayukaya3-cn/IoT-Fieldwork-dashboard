@@ -13,12 +13,19 @@
 | リポジトリ | `.env`・`secrets.toml`・`service_account*.json`・`token*.json`・`*.pem`・写真・`data/` を入れない | `.gitignore`（テストで確認） |
 | CI | GitHub Actions はコミットSHAで固定、トークンは読み取りのみ。pip-audit・bandit・CodeQL を実行 | `.github/workflows/` |
 
-## GitHub 側で設定してほしいこと（リポジトリ管理者）
+## GitHub 側で設定してほしいこと（リポジトリ管理者が画面で行う）
 
-1. Settings → Rules → Rulesets：`main` に **Restrict deletions・Block force pushes・Require a pull request・Require status checks（`test`・`scan`）**
-2. Settings → Advanced Security：**Dependabot alerts**・**Dependabot security updates**・**Private vulnerability reporting** をオン
-3. Settings → Actions → General → Workflow permissions を **Read repository contents**
-4. Settings → General：**Automatically delete head branches** をオン
+設定の変更は管理者の画面からしかできないため、ここに手順をまとめています。所要時間は5分ほどです。
+
+| # | 場所 | 操作 |
+|---|---|---|
+| 1 | Settings → Rules → Rulesets → **New ruleset ▾ → Import a ruleset** | `.github/rulesets/main-protection.json` を読み込んで **Create**（main の削除・強制pushの禁止、PR必須、`test`・`scan` の成功が必須） |
+| 2 | Settings → Advanced Security | **Dependabot alerts**・**Dependabot security updates**・**Private vulnerability reporting** を Enable |
+| 3 | Settings → Actions → General → Workflow permissions | **Read repository contents and packages permissions** を選んで Save |
+| 4 | Settings → General → Pull Requests | **Automatically delete head branches** にチェック |
+
+ルールセットを入れたあとは、main に直接 push できなくなります（変更はブランチ → PR → チェック成功 → マージ）。
+JSON の `integration_id: 15368` は GitHub Actions を表す番号です（チェックの出どころを GitHub Actions に限る）。
 
 ## 実機（IoTキット）側で守ること
 
