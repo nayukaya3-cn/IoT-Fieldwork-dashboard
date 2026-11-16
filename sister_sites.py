@@ -35,6 +35,8 @@ LINKS: list[tuple[str, str, str, str]] = [
     ("unyo", "tanpaku", "panic", "止まっても困らない備え（パニックプルーフ）と、止まらない運用は同じ考え方"),
     ("mega_rensa", "tanpaku", "panic", "井戸・ハウスの備え（パニックプルーフ）を、依存の連鎖で見直す"),
     ("mega_jikyu", "bakery", "", "播いた麦でパンを焼く現場"),
+    ("hatsuga", "tanpaku", "hatsuga", "同じ畑の記録を、教室で計算する版（気温と日数は反比例・『見た日』と『出た日』）"),
+    ("hatsuga", "bakery", "", "小麦をまいた畑。今まく作物の『計画と実績』に同じ記録がある"),
     ("mega_jikyu", "tanpaku", "biseibutsu", "サワー種（自家製の酵母）と発酵の温度"),
 ]
 
