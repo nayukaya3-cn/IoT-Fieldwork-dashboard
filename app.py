@@ -4,7 +4,7 @@ IoTアプリ構築・運用支援 ＝ フィールドワーク実践 ─ 入口�
 起動: streamlit run app.py
   ホームは home.py、各ページは views/（pages/ という名前にしない：Streamlit が自動で読みこみ、
   URLを直接開いたときに左メニューがファイル名の一覧に置きかわるため）、計算部品は iot_core.py（測る〜つくる）と ops_core.py（運用・届ける）。
-左メニューは8つの段の順、そのあとにメガリスク（南海トラフ地震＋富士山噴火）への備え。ページを足すときは NAV に1行足すだけ（ファイルが無い行は自動で飛ばす）。
+左メニューは8つの段の順、畑の実例（発芽の予測）、そのあとにメガリスク（南海トラフ地震＋富士山噴火）への備え。ページを足すときは NAV に1行足すだけ（ファイルが無い行は自動で飛ばす）。
 """
 import importlib
 from pathlib import Path
@@ -13,6 +13,7 @@ import streamlit as st
 
 import backbone
 import guard
+import hatsuga_core
 import iot_core
 import mega_core
 import ops_core
@@ -21,7 +22,7 @@ import ui
 
 # Streamlit Cloud が古いモジュールを読みこんだまま app.py だけ新しくなったときの対策
 if getattr(ui, "API_VERSION", 0) < 1:
-    for _m in (iot_core, mega_core, ops_core, backbone, guard, ss, ui):
+    for _m in (iot_core, mega_core, ops_core, hatsuga_core, backbone, guard, ss, ui):
         importlib.reload(_m)
 
 ROOT = Path(__file__).parent
@@ -43,6 +44,9 @@ NAV = {
         ("views/7_tsukuru.py", "つくる：設計と費用", "🖨️"),
         ("views/8_unyo.py", "運用する：健康診断・点検", "🔁"),
         ("views/9_todokeru.py", "届ける：言えることで伝える", "🛒"),
+    ],
+    "🌱 畑の実例（8つの段をつなぐ）": [
+        ("views/16_hatsuga.py", "地温を足して、発芽の日を知らせる", "🌱"),
     ],
     "🌋 メガリスクに備える（実験的プロトタイプ）": [
         ("views/11_mega_rekishi.py", "歴史と連動：時間差", "🌊"),

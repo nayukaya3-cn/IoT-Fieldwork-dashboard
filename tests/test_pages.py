@@ -112,3 +112,18 @@ def test_url_paths_are_unique_and_short():
     import sister_sites as ss
     for here, *_ in ss.LINKS:
         assert here in names, here
+
+
+def test_outage_delays_the_notice(monkeypatch):
+    """畑の実例：記録が止まった日を足さないと知らせが遅れ、うめると元にもどる"""
+    at = _run("views/16_hatsuga.py", monkeypatch)
+    assert any(m.label == "止まった日を足さない" and "おそい" in str(m.delta) for m in at.metric)
+    assert any("おそく" in e.value for e in at.error)
+    at.slider(key="hg_len").set_value(0).run()
+    assert any(m.label == "止まった日を足さない" and m.delta == "ずれなし" for m in at.metric)
+    assert not at.error
+
+
+def test_hatsuga_core():
+    import hatsuga_core as hc
+    hc._self_check()

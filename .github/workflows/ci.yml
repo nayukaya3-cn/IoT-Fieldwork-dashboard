@@ -37,5 +37,6 @@ jobs:
           python guard.py
           python sister_sites.py
           python mega_core.py
+          python hatsuga_core.py
       - name: テスト（計算＋全ページの描画＋保護）
         run: pytest -q
